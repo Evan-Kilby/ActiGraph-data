@@ -16,7 +16,7 @@ from scipy.signal import savgol_filter
 # In[2]:
 
 
-IMU_data = "D:\Evan-CNN (2024-02-01)-IMU.csv"
+IMU_data = "# add your file path"
 skip_rows = 11
 columns = ['Timestamp', 'Accelerometer X', 'Accelerometer Y', 'Accelerometer Z', 'Gyroscope X', 'Gyroscope Y', 'Gyroscope Z']
 
@@ -41,7 +41,7 @@ df = df.set_index('Timestamp')
 
 
 # Apply Savitzky-Golay filter to accelerometer columns
-df_filtered = df.copy()  # Make a copy to avoid modifying the original data
+df_filtered = df.copy()  
 
 # Apply SG filter to each column
 for column in COI:
@@ -54,7 +54,7 @@ print(df_filtered.head(5))
 # In[5]:
 
 
-#Applying 
+#Applying rolling window
 IMU_SG_RW = df_filtered.rolling(window=50000).mean()
 print(IMU_SG_RW.head())
 
@@ -87,7 +87,7 @@ plt.title(' Daily Accelerometer and Gyroscope Data')
 plt.xlabel('Time (in hours)')
 plt.ylabel('Displacement (in g-forces)')
 
-# Along with altering end/start time, change tick_
+
 tick_labels = pd.date_range(start=start_time, end=end_time, freq='H').strftime('%H')
 plt.xticks(pd.date_range(start=start_time, end=end_time, freq='H'), tick_labels, rotation=45, ha='right')
 plt.tight_layout()
